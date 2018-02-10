@@ -1,0 +1,662 @@
+<html>
+<head>
+<title>C++ Guide | e-Guide</title>
+<style>
+
+body{
+margin: 25px 75px;}
+body{
+background-image: url("form.jpg");}
+
+#Goals{
+ color: blue;
+}
+p{
+	text-align:justify;
+    
+	}
+.note{
+	font-weight: bold;
+	}
+dt{
+	font-weight: bold;
+	margin:10px;
+	}
+dd{
+	font-style: oblique;
+	
+	}
+pre{
+padding: 6px 10px;
+background-color: gray;
+border: 1px solid black;
+}
+.button {
+	display:inline-block;
+    height: 30px auto;
+    width: 150px auto;
+	margin: 0 px auto;
+    color:blue;
+    text-align: center;
+    border: solid #427AA8 1px;
+    border-radius: 5px;
+	padding: 10px;
+}
+
+.button:hover {
+    background: red;
+}​
+
+</style>
+
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <style>
+  .jumbotron {
+    background-color: #f4511e; /* Orange */
+    color: #ffffff;
+}
+	   </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">e-Guide</a>
+    </div>
+	
+<ul class="nav navbar-nav">
+      <li class="active"><a href="mainpage.html">Home</a></li>
+      <li><a href="aboutus.html">About us</a></li>
+      <li><a href="feed.html">Feedback</a></li>
+	  <li><a href="suggestions.html">Content Suggestions</a></li>
+	  <li><a href="Admin.html">Admin Login</a></li>
+	  
+	 <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <a href="Student.html"><button class="btn btn-danger navbar-btn">Student Login</button></a>
+    </ul>
+  </div>
+</nav>
+<a href="AfterStuLogin.html" class="button"><img src="home-512.png" style="width:20; height:20; margin-top:6px;"></a>
+<!--
+<a href="mainpage.html" class="button"><img src="home-512.png" style="width:20; height:20; margin-top:6px;"></a>
+<a href="#END" class="button" style="float:right;">Go to End</a><br>
+<a href="suggestions.html" class="button" style="float:right; margin-top:2px;">Suggestions?</a>
+-->
+<div class="jumbotron text-center">
+<img src="cpp.png" style="position:absolute; left:520px; top:190px; width:70px; height:70px;">
+  <h1>Guide</h1>
+
+  <p><p><center>Let's begin learning C++</center></p></p>
+</div>
+
+<table style="border:0px solid blue; padding:4px;">
+<tr>
+<td><a href="#HeaderFiles" class="button">HeaderFiles</a></td>
+<td><a href="#Self-contained-Headers" class="button">Self-contained Headers</a></td>
+<td><a href="#The__define_Guard" class="button">The #define Guard</a></td>
+<td><a href="#Forward_Declarations" class="button">Forward Declarations</a></td>
+<td><a href="#Inline_Functions" class="button">Inline Functions</a></td>
+<td><a href="#Names_and_Order_of_Includes" class="button">Names and Order of Includes</a></td>
+<td><a href="#Scoping" class="button">Scoping</a></td>
+<td><a href="#Namespaces" class="button">Namespaces</a></td>
+</tr>
+</table>
+<h2>Background</h2>
+
+<p>C++ is one of the main development languages  used by
+many of Google's open-source projects. As every C++
+programmer knows, the language has many powerful features, but
+this power brings with it complexity, which in turn can make
+code more bug-prone and harder to read and maintain.</p>
+
+<p>The goal of this guide is to manage this complexity by
+describing in detail the dos and don'ts of writing C++ code.
+These rules exist to
+keep  the code base manageable while still allowing
+coders to use C++ language features productively.</p>
+
+<p><em>Style</em>, also known as readability, is what we call
+the conventions that govern our C++ code. The term Style is a
+bit of a misnomer, since these conventions cover far more than
+just source file formatting.</p>
+
+<p>
+Most open-source projects developed by
+Google conform to the requirements in this guide.
+</p>
+<p class="note">Note that this guide is not a C++ tutorial: we assume that
+the reader is familiar with the language. </p>
+
+<h3>Goals of the Style Guide</h3>
+<div>
+<p>Why do we have this document?</p>
+
+<p>There are a few core goals that we believe this guide should
+serve. These are the fundamental <b>why</b>s that
+underlie all of the individual rules. By bringing these ideas to
+the fore, we hope to ground discussions and make it clearer to our
+broader community why the rules are in place and why particular
+decisions have been made. If you understand what goals each rule is
+serving, it should be clearer to everyone when a rule may be waived
+(some can be), and what sort of argument or alternative would be
+necessary to change a rule in the guide.</p>
+
+<p>The goals of the style guide as we currently see them are as follows:</p>
+<dl>
+<dt>Style rules should pull their weight</dt>
+<dd>The benefit of a style rule
+must be large enough to justify asking all of our engineers to
+remember it. The benefit is measured relative to the codebase we would
+get without the rule, so a rule against a very harmful practice may
+still have a small benefit if people are unlikely to do it
+anyway. This principle mostly explains the rules we don&#8217;t have, rather
+than the rules we do: for example, <code>goto</code> contravenes many
+of the following principles, but is already vanishingly rare, so the Style
+Guide doesn&#8217;t discuss it.</dd>
+
+<dt>Optimize for the reader, not the writer</dt>
+<dd>Our codebase (and most individual components submitted to it) is
+expected to continue for quite some time. As a result, more time will
+be spent reading most of our code than writing it. We explicitly
+choose to optimize for the experience of our average software engineer
+reading, maintaining, and debugging code in our codebase rather than
+ease when writing said code.  "Leave a trace for the reader" is a
+particularly common sub-point of this principle: When something
+surprising or unusual is happening in a snippet of code (for example,
+transfer of pointer ownership), leaving textual hints for the reader
+at the point of use is valuable (<code>std::unique_ptr</code>
+demonstrates the ownership transfer unambiguously at the call
+site). </dd>
+
+<dt>Be consistent with existing code</dt>
+<dd>Using one style consistently through our codebase lets us focus on
+other (more important) issues. Consistency also allows for
+automation: tools that format your code or adjust
+your <code>#include</code>s only work properly when your code is
+consistent with the expectations of the tooling. In many cases, rules
+that are attributed to "Be Consistent" boil down to "Just pick one and
+stop worrying about it"; the potential value of allowing flexibility
+on these points is outweighed by the cost of having people argue over
+them. </dd>
+
+<dt>Be consistent with the broader C++ community when appropriate</dt>
+<dd>Consistency with the way other organizations use C++ has value for
+the same reasons as consistency within our code base. If a feature in
+the C++ standard solves a problem, or if some idiom is widely known
+and accepted, that's an argument for using it. However, sometimes
+standard features and idioms are flawed, or were just designed without
+our codebase's needs in mind. In those cases (as described below) it's
+appropriate to constrain or ban standard features.  In some cases we
+prefer a homegrown or third-party library over a library defined in
+the C++ Standard, either out of perceived superiority or insufficient
+value to transition the codebase to the standard interface.</dd>
+
+<dt>Avoid surprising or dangerous constructs</dt>
+<dd>C++ has features that are more surprising or dangerous than one
+might think at a glance. Some style guide restrictions are in place to
+prevent falling into these pitfalls. There is a high bar for style
+guide waivers on such restrictions, because waiving such rules often
+directly risks compromising program correctness.
+</dd>
+
+<dt>Avoid constructs that our average C++ programmer would find tricky
+or hard to maintain</dt>
+<dd>C++ has features that may not be generally appropriate because of
+the complexity they introduce to the code. In widely used
+code, it may be more acceptable to use
+trickier language constructs, because any benefits of more complex
+implementation are multiplied widely by usage, and the cost in understanding
+the complexity does not need to be paid again when working with new
+portions of the codebase. When in doubt, waivers to rules of this type
+can be sought by asking 
+your project leads. This is specifically
+important for our codebase because code ownership and team membership
+changes over time: even if everyone that works with some piece of code
+currently understands it, such understanding is not guaranteed to hold a
+few years from now.</dd>
+
+<dt>Be mindful of our scale</dt>
+<dd>With a codebase of 100+ million lines and thousands of engineers,
+some mistakes and simplifications for one engineer can become costly
+for many. For instance it's particularly important to
+avoid polluting the global namespace: name collisions across a
+codebase of hundreds of millions of lines are difficult to work with
+and hard to avoid if everyone puts things into the global
+namespace.</dd>
+
+<dt>Concede to optimization when necessary</dt>
+<dd>Performance optimizations can sometimes be necessary and
+appropriate, even when they conflict with the other principles of this
+document.</dd>
+</dl>
+
+<p>The intent of this document is to provide maximal guidance with
+reasonable restriction. As always, common sense and good taste should
+prevail. By this we specifically refer to the established conventions
+of the entire Google C++ community, not just your personal preferences
+or those of your team. Be skeptical about and reluctant to use
+clever or unusual constructs: the absence of a prohibition is not the
+same as a license to proceed.  Use your judgment, and if you are
+unsure, please don't hesitate to ask your project leads to get additional
+input.</p>
+
+</div>
+
+<h2 id= "HeaderFiles">Header Files</h2>
+
+<p>In general, every <code>.cc</code> file should have an
+associated <code>.h</code> file. There are some common
+exceptions, such as  unittests and
+small <code>.cc</code> files containing just a
+<code>main()</code> function.</p>
+
+<p>Correct use of header files can make a huge difference to
+the readability, size and performance of your code.</p>
+
+<p>The following rules will guide you through the various
+pitfalls of using header files.</p>
+
+<h3 id="Self-contained-Headers">Self-contained Headers</h3>
+
+<div>
+<p>Header files should be self-contained (compile on their own) and
+end in <code>.h</code>.  Non-header files that are meant for inclusion
+should end in <code>.inc</code> and be used sparingly.</p>
+</div> 
+
+<div>
+<p>All header files should be self-contained. Users and re factoring
+tools should not have to adhere to special conditions to include the
+header. Specifically, a header should
+have header guards and include all
+other headers it needs.</p>
+
+<p>Prefer placing the definitions for template and inline functions in
+the same file as their declarations.  The definitions of these
+constructs must be included into every <code>.cc</code> file that uses
+them, or the program may fail to link in some build configurations.  If
+declarations and definitions are in different files, including the
+former should transitively include the latter.  Do not move these
+definitions to separately included header files (<code>-inl.h</code>);
+this practice was common in the past, but is no longer allowed.</p>
+
+<p>As an exception, a template that is explicitly instantiated for
+all relevant sets of template arguments, or that is a private
+implementation detail of a class, is allowed to be defined in the one
+and only <code>.cc</code> file that instantiates the template.</p>
+
+<p>There are rare cases where a file designed to be included is not
+self-contained.  These are typically intended to be included at unusual
+locations, such as the middle of another file.  They might not
+use header guards, and might not include
+their prerequisites.  Name such files with the <code>.inc</code>
+extension.  Use sparingly, and prefer self-contained headers when
+possible.</p>
+
+</div> 
+<h3 id="The__define_Guard">The #define Guard</h3>
+
+<div class="summary">
+<p>All header files should have <code>#define</code> guards to
+prevent multiple inclusion. The format of the symbol name
+should be
+<code><i>&lt;PROJECT&gt;</i>_<i>&lt;PATH&gt;</i>_<i>&lt;FILE&gt;</i>_H_</code>.</p>
+</div> 
+
+<div class="stylebody">
+
+
+
+<p>To guarantee uniqueness, they should
+be based on the full path in a project's source tree. For
+example, the file <code>HTML/src/A/xyz.h</code> in
+project <code>HTML</code> should have the following
+guard:</p>
+
+<pre>#ifndef HTML_A_xyz_H_
+#define HTML_A_xyz_H_
+
+...
+
+#endif  // HTML_A_xyz_H_
+</pre>
+</div> 
+
+<h3 id="Forward_Declarations">Forward Declarations</h3>
+
+<div class="summary">
+  <p>Avoid using forward declarations where possible.
+  Just <code>#include</code> the headers you need.</p>
+</div>
+
+<div class="stylebody">
+
+<div class="definition">
+<p>A "forward declaration" is a declaration of a class,
+function, or template without an associated definition.</p>
+</div>
+
+<div>
+<b>Pros:</b>
+<ul>
+  <li>Forward declarations can save compile time, as
+  <code>#include</code>s force the compiler to open
+  more files and process more input.</li>
+
+  <li>Forward declarations can save on unnecessary
+  recompilation. <code>#include</code>s can force
+  your code to be recompiled more often, due to unrelated
+  changes in the header.</li>
+</ul>
+</div>
+
+<div>
+<b>Cons:</b>
+<ul>
+  <li>Forward declarations can hide a dependency, allowing
+  user code to skip necessary recompilation when headers
+  change.</li>
+
+  <li>A forward declaration may be broken by subsequent
+  changes to the library. Forward declarations of functions
+  and templates can prevent the header owners from making
+  otherwise-compatible changes to their APIs, such as
+  widening a parameter type, adding a template parameter
+  with a default value, or migrating to a new namespace.</li>
+
+  <li>Forward declaring symbols from namespace
+  <code>std::</code> yields undefined behavior.</li>
+
+  <li>It can be difficult to determine whether a forward
+  declaration or a full <code>#include</code> is needed.
+  Replacing an <code>#include</code> with a forward
+  declaration can silently change the meaning of
+  code:
+      <pre>      // b.h:
+      struct B {};
+      struct D : B {};
+
+      // good_user.cc:
+      #include "b.h"
+      void f(B*);
+      void f(void*);
+      void test(D* x) { f(x); }  // calls f(B*)
+      </pre>
+  If the <code>#include</code> was replaced with forward
+  decls for <code>B</code> and <code>D</code>,
+  <code>test()</code> would call <code>f(void*)</code>.
+  </li>
+
+  <li>Forward declaring multiple symbols from a header
+  can be more verbose than simply
+  <code>#include</code>ing the header.</li>
+
+  <li>Structuring code to enable forward declarations
+  (e.g. using pointer members instead of object members)
+  can make the code slower and more complex.</li>
+
+  
+</ul>
+</div>
+
+<div>
+<b>Decision: </b>
+<ul>
+  <li>Try to avoid forward declarations of entities
+  defined in another project.</li>
+
+  <li>When using a function declared in a header file,
+  always <code>#include</code> that header.</li>
+
+  <li>When using a class template, prefer to
+  <code>#include</code> its header file.</li>
+</ul>
+
+<p>Please see <a href="#Names_and_Order_of_Includes">Names and Order
+of Includes</a> for rules about when to #include a header.</p>
+</div>
+
+</div> 
+<h3 id="Inline_Functions">Inline Functions</h3>
+
+<div class="summary">
+<p>Define functions inline only when they are small, say, 10
+lines or fewer.</p>
+</div>
+
+<div class="stylebody">
+
+<div class="definition">
+<p>You can declare functions in a way that allows the compiler to expand
+them inline rather than calling them through the usual
+function call mechanism.</p>
+</div>
+
+<div class="pros">
+<p>Inlining a function can generate more efficient object
+code, as long as the inlined function is small. Feel free
+to inline accessors and mutators, and other short,
+performance-critical functions.</p>
+</div>
+
+<div class="cons">
+<p>Overuse of inlining can actually make programs slower.
+Depending on a function's size, inlining it can cause the
+code size to increase or decrease. Inlining a very small
+accessor function will usually decrease code size while
+inlining a very large function can dramatically increase
+code size. On modern processors smaller code usually runs
+faster due to better use of the instruction cache.</p>
+</div>
+
+<div class="decision">
+<p>A decent rule of thumb is to not inline a function if
+it is more than 10 lines long. Beware of destructors,
+which are often longer than they appear because of
+implicit member- and base-destructor calls!</p>
+
+<p>Another useful rule of thumb: it's typically not cost
+effective to inline functions with loops or switch
+statements (unless, in the common case, the loop or
+switch statement is never executed).</p>
+
+<p>It is important to know that functions are not always
+inlined even if they are declared as such; for example,
+virtual and recursive functions are not normally inlined.
+Usually recursive functions should not be inline. The
+main reason for making a virtual function inline is to
+place its definition in the class, either for convenience
+or to document its behavior, e.g., for accessors and
+mutators.</p>
+</div> 
+
+</div> 
+
+<h3 id="Names_and_Order_of_Includes">Names and Order of Includes</h3>
+
+<div class="summary">
+<p>Use standard order for readability and to avoid hidden
+dependencies: Related header, C library, C++ library,  other libraries'
+<code>.h</code>, your project's <code>.h</code>.</p>
+</div>
+
+<div class="stylebody">
+<p>
+All of a project's header files should be
+listed as descendants of the project's source
+directory without use of UNIX directory shortcuts
+<code>.</code> (the current directory) or <code>..</code>
+(the parent directory). For example,
+
+<code>google-awesome-project/src/base/logging.h</code>
+should be included as:</p>
+
+<pre>#include "base/logging.h"
+</pre>
+
+<p>In <code><var>dir/foo</var>.cc</code> or
+<code><var>dir/foo_test</var>.cc</code>, whose main
+purpose is to implement or test the stuff in
+<code><var>dir2/foo2</var>.h</code>, order your includes
+as follows:</p>
+
+<ol>
+  <li><code><var>dir2/foo2</var>.h</code>.</li>
+
+  <li>C system files.</li>
+
+  <li>C++ system files.</li>
+
+  <li>Other libraries' <code>.h</code>
+  files.</li>
+
+  <li>
+  Your project's <code>.h</code>
+  files.</li>
+</ol>
+
+<p>With the preferred ordering, if
+<code><var>dir2/foo2</var>.h</code> omits any necessary
+includes, the build of <code><var>dir/foo</var>.cc</code>
+or <code><var>dir/foo</var>_test.cc</code> will break.
+Thus, this rule ensures that build breaks show up first
+for the people working on these files, not for innocent
+people in other packages.</p>
+
+<p><code><var>dir/foo</var>.cc</code> and
+<code><var>dir2/foo2</var>.h</code> are usually in the same
+directory (e.g. <code>base/basictypes_test.cc</code> and
+<code>base/basictypes.h</code>), but may sometimes be in different
+directories too.</p>
+
+
+
+<p>Within each section the includes should be ordered
+alphabetically. Note that older code might not conform to
+this rule and should be fixed when convenient.</p>
+
+<p>You should include all the headers that define the symbols you rely
+upon, except in the unusual case of <a href="#Forward_Declarations">forward
+declaration</a>. If you rely on symbols from <code>bar.h</code>,
+don't count on the fact that you included <code>foo.h</code> which
+(currently) includes <code>bar.h</code>: include <code>bar.h</code>
+yourself, unless <code>foo.h</code> explicitly demonstrates its intent
+to provide you the symbols of <code>bar.h</code>.  However, any
+includes present in the related header do not need to be included
+again in the related <code>cc</code> (i.e., <code>foo.cc</code> can
+rely on <code>foo.h</code>'s includes).</p>
+
+<p>For example, the includes in
+
+<code>google-awesome-project/src/foo/internal/fooserver.cc</code>
+might look like this:</p>
+
+
+<pre>#include "foo/server/fooserver.h"
+
+#include &lt;sys/types.h&gt;
+#include &lt;unistd.h&gt;
+
+#include &lt;hash_map&gt;
+#include &lt;vector&gt;
+
+#include "base/basictypes.h"
+#include "base/commandlineflags.h"
+#include "foo/server/bar.h"
+</pre>
+
+<p class="exception">Sometimes, system-specific code needs
+conditional includes. Such code can put conditional
+includes after other includes. Of course, keep your
+system-specific code small and localized. Example:</p>
+
+<pre>#include "foo/public/fooserver.h"
+
+#include "base/port.h"  // For LANG_CXX11.
+
+#ifdef LANG_CXX11
+#include &lt;initializer_list&gt;
+#endif  // LANG_CXX11
+</pre>
+
+</div> 
+
+<h2 id="Scoping">Scoping</h2>
+
+<h3 id="Namespaces">Namespaces</h3>
+
+<div class="summary">
+<p>With few exceptions, place code in a namespace. Namespaces
+should have unique names based on the project name, and possibly
+its path. Do not use <i>using-directives</i> (e.g.
+<code>using namespace foo</code>). Do not use
+inline namespaces. For unnamed namespaces, see Unnamed Namespaces and
+Static Variables.
+</p></div>
+
+<div class="stylebody">
+
+<div class="definition">
+<p>Namespaces subdivide the global scope
+into distinct, named scopes, and so are useful for preventing
+name collisions in the global scope.</p>
+</div>
+
+<div class="pros">
+
+<p>Namespaces provide a method for preventing name conflicts
+in large programs while allowing most code to use reasonably
+short names.</p>
+
+<p>For example, if two different projects have a class
+<code>Foo</code> in the global scope, these symbols may
+collide at compile time or at runtime. If each project
+places their code in a namespace, <code>project1::Foo</code>
+and <code>project2::Foo</code> are now distinct symbols that
+do not collide, and code within each project's namespace
+can continue to refer to <code>Foo</code> without the prefix.</p>
+
+<p>Inline namespaces automatically place their names in
+the enclosing scope. Consider the following snippet, for
+example:</p>
+
+<pre>namespace X {
+inline namespace Y {
+  void foo();
+}  // namespace Y
+}  // namespace X
+</pre>
+
+<p>The expressions <code>X::Y::foo()</code> and
+<code>X::foo()</code> are interchangeable. Inline
+namespaces are primarily intended for ABI compatibility
+across versions.</p>
+</div>
+
+<div class="cons">
+
+<p>Namespaces can be confusing, because they complicate
+the mechanics of figuring out what definition a name refers
+to.</p>
+
+<p>Inline namespaces, in particular, can be confusing
+because names aren't actually restricted to the namespace
+where they are declared. They are only useful as part of
+some larger versioning policy.</p>
+
+<p>In some contexts, it's necessary to repeatedly refer to
+symbols by their fully-qualified names. For deeply-nested
+namespaces, this can add a lot of clutter.</p>
+</div>
+<div id="END"></div>
+<a href="#TOP" class="button" style="position:relative; float:right;">Go to Top</a>
+</body>
+</html>

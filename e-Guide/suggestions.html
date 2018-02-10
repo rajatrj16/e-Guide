@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>Suggestions | e-Guide</title>
+<script>
+/*function resetform(){
+document.getElementById("suggestions").reset();
+}
+function sendform(){
+	var cn= check_name();
+	var cu= check_user();
+	var cd= check_domain();
+	if((cn && cu && cd)==true)
+	alert("Your suggestions recorded :)");
+	}
+	*/
+</script>
+<style>
+h1 {
+padding:8px;
+  text-align: center;
+  color: black;
+  font-size:200%;
+}
+.button {
+	display:inline-block;
+    height: 30px auto;
+    line-height: 30px;
+    width: 150px auto;
+	margin: 40 px auto;
+    color:blue;
+    text-align: center;
+    border: solid blue 1px;
+    border-radius: 5px;
+	padding: 10px;
+}
+
+.button:hover {
+    background: orange;
+}
+table{
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+ tr:hover {background-color: #f5f5f5}
+body{
+margin:100px 450px;
+}
+td{
+text-align:center;
+padding:10px;
+}
+.button:hover
+{
+background-color: #f5f5f5}
+textarea {
+    resize: none;
+}
+body{
+background-image:url("form.jpg");
+}
+.button { cursor: pointer; }
+</style>
+<script language="javascript">
+function check_name() {
+
+    var name_data = document.getElementById('namefield');
+    var filter = /^([a-zA-Z])+$/;
+
+    if (!filter.test(name_data.value)) {
+    alert('Please provide a VALID NAME');
+	document.getElementById('namefield').value="";
+    return false;
+ }
+ return true;
+}
+function check_email() {
+
+    var uname = document.getElementById('txtEmail');
+    var filter = /^[a-zA-Z0-9._]*\@[a-zA-Z]*\.[a-zA-Z]{2,5}$/;
+
+    if (!filter.test(uname.value)) {
+    alert('Please provide a valid email address');
+	document.getElementById('txtEmail').value="";
+    return false;
+ }
+ return true;
+}
+</script>
+</head>
+
+<body>
+<a href="mainpage.html" class="button"><img src="home-512.png" style="width:20; height:20; margin-top:6px;"></a>
+<h1>How we can improve? </h1>
+<table border="1">
+<form id="suggestions" method='post' action="suggestions_php.php">
+<tr>
+<td>Name*: </td><td><input type='text' name="nameT" id='namefield' size=32 autofocus onblur="Javascript:check_name();"><br /></td></tr>
+<tr>
+<td>Email*:</td><td> <input type='text' id='txtEmail' name='emailT' size=25 onblur='Javascript:check_email();'> <br /></td></tr>
+<tr><td>Was our content helpful? </td>
+
+<td>  <input type="radio" name="choice" id="yes" value="yes">Yes<input type='radio' name="choice" id="no" value="no">No<br /></td></tr>
+<tr><td>What language are you talking about?</td>
+<td>
+<select name="part">
+<option value=-1>Select your choice</option>
+<option value=1>C++</option>
+<option value=2>Java</option>
+<option value=3>R</option>
+<option value=4>JavaScript</option>
+</select>
+</td>
+</tr>
+<tr><td>Your valuable suggestions:<br /></td><td>
+<textarea name='commentT' id='comment' rows=8 cols=25></textarea><br /></td></tr>
+<tr>
+<td>
+<input type="submit" value="Submit"></td>
+<td><input type="reset" value="Reset"></td>
+</tr>
+</form>
+</table>
+<br>
+
+
+</html>
+
+

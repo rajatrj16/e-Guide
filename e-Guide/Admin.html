@@ -1,0 +1,122 @@
+<html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+<style>
+  .jumbotron {
+    background-color: #f4511e; /* Orange */
+    color: #ffffff;
+}
+</style>
+	<title>Admin Login</title>
+
+	<script type="text/javascript">
+	/*	<function validate()
+		{
+			un=document.getElementById("uname").value;
+			ps=document.getElementById("pswd").value;
+			if(uempty() && pempty())
+			{
+			if(un=="Admin" && ps=="Admin")
+			{
+				alert("Successfully logged in");
+				window.open("mainpage.html","_self");
+				
+			}
+			else
+			alert("Invalid credentials");
+			
+			}
+		}
+	*/
+		function uempty()
+		{
+			if((document.getElementById("uname").value).length<1)
+			{
+				alert("Username should not be empty");
+				document.getElementsByid("uname").innerHTML = "Please enter value!";
+				return 0;
+			}
+			else
+				return 1;
+		}
+		function pempty()
+		{
+			if((document.getElementById("pswd").value).length<1)
+			{
+				alert("Password should not be empty");
+				document.getElementsByid("pswd").innerHTML = "Please enter value!";
+				return 0;
+			}
+			else
+				return 1;
+		}
+		function hide(n)
+		{
+			document.getElementsByTagName("span")[n].innerHTML = "";
+			}
+		
+	</script>
+
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">e-Guide</a>
+    </div>
+	
+<ul class="nav navbar-nav">
+      <li class="active"><a href="mainpage.html">Home</a></li>
+      <li><a href="aboutus.html">About us</a></li>
+      <li><a href="feed.html">Feedback</a></li>
+	  <li><a href="suggestions.html">Content Suggestions</a></li>
+	  <li><a href="Admin.html">Admin Login</a></li>
+	  
+	 <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <a href="Student.html"><button class="btn btn-danger navbar-btn">Student Login</button></a>
+    </ul>
+  </div>
+</nav>
+
+<div class="jumbotron text-center">
+  <h1>Admin login</h1>
+
+  <p><p>Input your credentials</p></p>
+</div>
+<form name="Admin" action="AdminLogin.php" method="post">	
+<center>
+<div id="Admin">
+	<h2>Sign in with your Admin ID</h2>
+	<br>
+	<table>
+		<tr>
+			<td> Admin ID:</td>
+			<td> <input id = "uname"  name="usernameT" type = "text" onfocus = "hide(0);" onblur = "uempty();"/></td>
+			<td><span></span></td>
+		</tr>
+		
+		<tr>
+			<td> Password: </td>
+			<td><input id = "pswd" type = "password" name="passwordT" onfocus = "hide(1);" onblur = "pempty();"/></td>
+			<td><span></span></td>
+		</tr>
+		<tr>
+			<td  align = "center"><input id = "login" type = "submit" value = "Log In"></td>
+			<td><input id="reset" type="reset" value="Reset"/></td>
+		</tr>
+	</table>
+	
+
+</center>	
+</div>	
+</form>
+</body>
+</html>

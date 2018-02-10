@@ -1,0 +1,359 @@
+<HTML>
+<LINK REL="STYLESHEET" TYPE="TEXT/CSS" HREF="STYLEGUIDE.CSS"></LINK>
+<TITLE>R Guide | e-Guide</TITLE>
+<style>
+
+h1 {
+padding:10px;
+  text-align: center;
+  font-size: 18pt;
+  color: blue;
+  font-size:300%;
+}
+.button {
+	display:inline-block;
+    height: 30px;
+    line-height: 30px;
+    width: 150px auto;
+	margin: 0 px auto;
+    color:blue;
+    text-align: center;
+    border: solid #427AA8 1px;
+    border-radius: 5px;
+	padding: 10px;
+}
+
+.button:hover {
+    background: #59A3E0;
+}
+body{
+background-image:url("form.jpg");
+}
+</style>
+</HEAD>
+<BODY>
+<a href="AfterStuLogin.html" class="button"><img src="home-512.png" style="width:20; height:20; margin-top:6px;"></a>
+<H1>R Style Guide</h1>
+<P STYLE="COLOR:GREEN;">
+R is a high-level programming language used primarily for statistical computing and graphics.  The goal of the R Programming Style Guide is to make our R code easier to read, share, and verify. The rules below were designed in collaboration with the entire R user community at Google.
+</P>
+<H2> Summary : R Style Guide</H1>
+<OL>
+<LI>
+<A HREF="#Fnames">File Names</A>
+: end in
+<CODE>.R</CODE>
+</LI>
+<LI>
+<A HREF="#Linelen">Line Length</A>
+: maximum 80 characters
+</LI>
+<LI>
+<A HREF="#Indentation">Indentation</A>
+:two spaces, no tabs
+</LI>
+<LI>
+<A HREF="#Spacing">Spacing</A>
+</LI>
+<LI>
+<A HREF="#Curlybraces">Curly Braces</A>
+:first on same line, last on own line
+</LI>
+<LI>
+<A HREF="#Else">Else</a>
+:Surround else with braces
+</LI>
+<LI>
+<A HREF="#assignment">Assignment</A>
+:use
+<code><-</code>
+,not
+<code>=</code>
+</LI>
+<LI>
+<A HREF="#Semicolons">Semicolons</A>
+: don't use them
+</LI>
+<LI>
+<A HREF="#generallayout">General Layout and Ordering</A>
+</LI>
+<LI>
+<A HREF="#comments">Commenting Guidelines</A>
+:all commnts begin with
+<code>#</code>
+followed by a space; inline comments need two spaces before the 
+<code>#</code>
+</LI>
+<LI>
+<A HREF="#functiondefinition">Function Definition and Calls</A>
+</LI>
+<LI>
+<A HREF="#Examplefunction"> Example Function</A>
+</LI>
+<LI>
+<A HREF="#todo">TODO Style</A>
+:
+<code>TODO(username></code>
+</LI>
+</OL>
+<H2>Summary : R Language Rules</H2>
+<OL>
+<LI>
+<A HREF="#attach">Attach</a>
+:avoid using it
+</LI>
+<LI>
+<A HREF="#functions">Functions</A>
+:errors shoulds be raised using 
+<code> stop()</code>
+</LI>
+<LI>
+<A HREF="#objects">Objects and Methods</A>
+:avoid S4 objects and methods when possible; necer mix S3 and S4
+</LI>
+</OL>
+<H3>Notations and Naming</H3>
+<H4 >File Names</H4>
+<P id="Fnames">
+File names should end in
+<code>.R</code>
+and, of course, be meaningful.
+<br></br>
+GOOD:
+<code>predict_ad_revenue.R</code>
+<br></br>
+BAD:
+<code>
+<span style="color:violet">foo.R</span>
+</code>
+</P>
+<H4 >Identifiers</H4>
+<P id="identifiers">
+Don't use underscore (
+<code>_</code>
+) or hyphens (
+<code>-</code>
+)
+in identifiers . Identifiers should be names according to the following conventions. The preferred form for variable names is all lower case letters and words separated with dots ( 
+<code>variable.name</code>
+), but
+<code>variablename</code>
+is also accepted; function names have initial capital letters and no dots (
+<code>FunctionName</code>
+);
+constants are named like functions but with an initial
+<code>k</code>
+.
+</P>
+<UL>
+<LI>
+<code>variable.name</code>
+is preferred,
+<code>variableName</code>
+is accepted
+<br></br>
+GOOD:
+<code>avg.clicks</code>
+<br></br>
+OK:
+<code>avgClicks</code>
+<br></br>
+BAD:
+<code>
+<span style="color:red">avg_Clicks</span>
+</code>
+<LI>
+<code>FunctionName</code>
+<br></br>
+GOOD:
+<code>CalculateAvgClicks</code>
+<br></br>
+BAD:
+<code>
+<span style="color:red">calculate_avg_clicks</span>
+</code>
+,
+<code>
+<span style="color:red">calculateAvgClicks</span>
+</code>
+<br></br>
+Make fuction names verbs.
+<br></br>
+<em>
+Exception: When creating a classes objects, the function name (constructor) and class should match( e.g., lm).
+</em>
+<LI>
+<code>kConstantName</code>
+</LI>
+</UL>
+<H3>Syntax</H3>
+<H4>Line Length</H4>
+<P id="Linelen">The maximum line length is 80 characters.</P>
+<H4 id="Indentation">Indentation</H4>
+<P>
+When indenting your code, use two spaces.Never use tabs or mix tabs and spaces.
+<BR></BR>
+<EM>
+Exception: When a line break occurs inside parenthesis, align the wrapped line with with the first character inside the parenthesis.
+</EM>
+<P>
+<H4 style="color:blue" id="Spacing">Spacing</H4>
+<P>
+Place spaces around all binary operators (
+<code>=</code>
+,
+<code>+</code>
+,
+<code>-</code>
+,etc.).
+<br></br>
+<EM>
+Exception: Spaces around
+<code>=</code>
+'s are optional when passing parameters in a function call.
+</EM>
+<BR></BR>
+Do not place a space before a comma, but always place one after comma.
+</P>
+<H4 style="color:blue" id="Curlybraces">Curly Braces</H4>
+<P>
+An opening curly brace should never go on its own line; a closing curly brace should always go on its own line.  You may omit curly braces when a block consists of a single statement; however, must consistently either use or not use curly braces for single statement blocks.
+</P>
+<H4 style="color:blue" id="Else">Surround else with braces</H4>
+<P>
+An <code>else</code>
+statement should always be surrounded on the same line by curly braces.
+</P>
+<pre>
+if(condition)
+{ one or more lines }
+else
+{
+one or more lines
+}
+</pre>
+<P>
+BAD:
+<BR></BR>
+</P>
+<pre style="color:red">
+if(condition)
+{ one or more lines }
+else
+{
+one or more lines
+}
+</pre>
+<P>
+ BAD:
+<BR></BR>
+</P>
+<pre style="color:red">if(condition)one line else one line </pre>
+<H4 style="color:blue" id="assignment">Assignment</H4>
+<P>
+use
+<code><-</code>
+, not
+<code>=</code>
+, for assignment.
+</p>
+<p>
+GOOD:
+<br></br>
+<code>x<-5</code>
+</p>
+<p>
+BAD:
+<br></br>
+<code>
+<span style="color:red">x=5</span>
+</code>
+</p>
+<h4 style="color:blue" id="Semicolons">Semicolons</h4>
+<p>
+Do not terminate your lines with semicolons or use semicolons to put more than one command on the same line.(Semicolons are not necessary, and are omitted for consistency with other Google style guides.)
+</p>
+<h4 style="color:blue" id="generallayout">General Layout and Ordering</h4>
+<p>
+If everyone uses the same general ordering, we'll be able to read and understand each other's scripts faster and more easily.
+</p>
+<ol>
+<li>Copyright statement comment</li>
+<li>Author comment</li>
+<li>File description comment, including purpose of program , inputs, and outputs</li>
+<li>
+<code>source()</code>
+and
+<code>library()</code>
+statements
+</li>
+<li>
+Executed statements, if applicable (e.g, <code> print </code>
+,
+<code>plot</code>
+)
+</li>
+</ol>
+<p>
+unit tests should go in separate file named
+<code>originalfilename_test.R</code>
+.</p>
+<h4 style="color:blue" id="comments">Commenting Guidelines</h4>
+<p>
+Comment your code. Entire commented lines shoud begin with
+<code>#</code>
+and one space.
+</p>
+<h4 style="color:blue" id="functiondefinition">Function Definition and Calls</h4>
+<p>
+Function definition should first line arguments without default values, followed by those with default values.
+</p>
+<h4 style="color:blue" id="Examplefunction">Example Function</h4>
+<p>
+Function should contain a comments section immediately below the function definition line. These comments should consits of a one-sentence description of the function; a list of the function's arguments, denoted by
+<code>Args:</code>
+, with a description of each ( including the data type); and a description of the return value, denoted by <code>Returns:</code>
+. The comments should be descriptive enough that a caller can use the function without reading any of the function's code.
+</p>
+<h4 style="color:blue" id="todo">TODO Style</h4>
+<p>
+Use a consistent style for TODOs throughout your code.
+<br></br>
+<code>
+TODO(username):Explicit description of action to be taken
+</code>
+</p>
+<h3>Languages</h3>
+<h4 style="color:blue"id="attach">Attach</h4>
+<p>
+The possibilities for creating errors when using <code>attach</code> are numerous.Avoid it.
+</p>
+<h4 style="color:blue" id="functionlanguage">Functions</h4>
+<p>
+Errors should be raised using <code>stop()</code>
+.
+</p>
+<h4 style="color:blue" "id=Exception">Exception</h4>
+<p>
+The coding convention described above should be followed,unless there is good reason to do otherwise. Exception include legacy code and modifying third-party code.
+</p>
+<h4 style="color:blue"" id=Partingword">Parting Words</h4>
+<p>
+If you are editing code, take a few minutes to look at the code around you and determine its style. If others use spaces around their <code>if</code> clauses, you should, too. If their comments have little boxes of stars around them, make your comments have little boxes of stars around them,too.
+The point of having style guidelines is to have a common vocabulary of coding so people can concentrate on what you are saying, rather than on how you are saying it. We present global style
+rules here so people know the vocabulary. But local style is also important. If code you add to a file looks drastically different from the existing code around it,the discontinuity will throw readers out of their rhythm when they go to read it. Try to avoid this.
+     
+OK, enough writing about writing code; the code itself is much more interesting. Have fun!
+<h3> References</h3>
+<p>
+<a href="http://www.maths.ith.se/help/R/RCC/">http://www.maths.ith.se/help/R/RCC/</a>-R Coding Conventions.</p>
+<p>
+<a href="http://ess.r-project.org/">href=http://ess.r-project.org/</a>
+- For emacs users. This runs R in your emacs and has an emacs mode.
+</p>
+
+     
+</BODY>
+</HTML>
+      
+    

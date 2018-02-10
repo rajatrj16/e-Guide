@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Report | e-Guide</title>
+		<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <style>
+  .jumbotron {
+    background-color: #f4511e; /* Orange */
+    color: #ffffff;
+}
+</style>
+<script>
+function printfunction() {
+    window.print();
+}
+</script>
+    </head>
+    <body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">e-Guide</a>
+    </div>
+	
+<ul class="nav navbar-nav">
+      <li class="active"><a href="mainpage.html">Home</a></li>
+      <li><a href="aboutus.html">About us</a></li>
+      <li><a href="feed.html">Feedback</a></li>
+	  <li><a href="suggestions.html">Content Suggestions</a></li>
+	  <li><a href="Admin.html">Admin Login</a></li>
+	  
+	 <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <a href="Student.html"><button class="btn btn-danger navbar-btn">Student Login</button></a>
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron text-center">
+  <h1>Welcome Admin</h1>
+
+  <p><p>Click the button to display/delete the student records</p></p>
+</div>
+<CENTER>
+<FORM NAME="GEN_REPORT" ACTION="report.php" METHOD="POST">
+ <INPUT TYPE="SUBMIT" VALUE="Student Records">
+</CENTER>
+</FORM>
+</body>
+</html>

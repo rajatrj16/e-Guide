@@ -1,0 +1,273 @@
+<html>
+<head>
+<title>JavaScript Guide | e-Guide</title>
+<style>
+body{
+margin: 25px 75px;}
+OL{
+list-style-type: lower-alpha;
+}
+.outer{
+
+    list-style-type: upper-roman;
+	list-style-position:inside;
+}
+body{
+background-image: url("form.jpg");}
+h1 {
+padding:10px;
+  text-align: center;
+   text-shadow: 2px 2px blue;
+  color: red;
+  font-size:300%;
+}
+h2,h3{
+	 color:gray;
+}
+.button {
+	display:inline-block;
+    height: 30px;
+    line-height: 30px;
+    width: 150px auto;
+	margin: 0 px auto;
+    color:blue;
+    text-align: center;
+    border: solid #427AA8 1px;
+    border-radius: 5px;
+	padding: 10px;
+}
+
+.button:hover {
+    background: #59A3E0;
+}​
+table{
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+	
+}
+tr:hover {background-color: green; }
+body{
+margin:40px 50px;
+background-image:url("form.jpg");
+}
+td{
+text-align:justify;
+padding:10px;
+}
+</style>
+
+
+
+</head>
+<body>
+<a href="AfterStuLogin.html" class="button"><img src="home-512.png" style="width:20; height:20; margin-top:6px;"></a>
+<a href="#End_of_page" class="button" style="position:relative; float:right;"><img src="down-arrow.png" style="width:20; height:20; margin-top:6px;"></a><br>
+<div id="content">
+
+<h1>JavaScript Style Guide</h1>
+<img src="jspic.png" height=100 width=120 style="float:right;">
+<OL class="outer">
+
+<LI><a href="#introduction">Introduction</a>
+<OL>
+<LI><a href="#terminology-notes">Terminology notes</a>
+<LI><a href="#guide-notes">Guide notes</a>
+</OL>
+
+<LI><a href="#source-file-basics">Source File Basics</a>
+<OL>
+<LI><a href="#file-name">File Name</a>
+<LI><a href="#file-encoding">File Encoding</a>
+<LI><a href="#special-characters">Special Characters</a>
+</OL>
+
+<LI><a href="#source-file-structure">Source File Structure</a>
+<OL>
+<LI><a href="#file-copyright">License or copyright information, if present</a>
+<LI><a href="#file-fileoverview">@fileoverview JSDoc, if present</a>
+<LI><a href="#file-goog-module">goog.module statement</a>
+</OL>
+
+
+</OL>
+
+<h2 id="introduction">1. Introduction</h2>
+
+<p></p>
+
+<p>This document serves as the <strong>complete</strong> definition of Google&#8217;s coding standards
+for source code in the JavaScript programming language. A JavaScript source file
+is described as being <em>in Google Style</em> if and only if it adheres to the rules
+herein.</p>
+
+<p>Like other programming style guides, the issues covered span not only aesthetic
+issues of formatting, but other types of conventions or coding standards as
+well. However, this document focuses primarily on the hard-and-fast rules that
+we follow universally, and avoids giving advice that isn't clearly enforceable
+(whether by human or tool). </p>
+
+<h3 id="terminology-notes">1.1 Terminology notes</h3>
+
+<p>In this document, unless otherwise clarified:</p>
+
+<ol>
+<li><p>The term <em>comment</em> always refers to <em>implementation</em> comments. We do not use
+the phrase <q>documentation comments</q>, instead using the common term &#8220;JSDoc&#8221;
+for both human-readable text and machine-readable annotations within
+<code>/** &#8230; */</code>.</p></li>
+<li><p>This Style Guide uses RFC 2119 terminology when using the phrases <em>must</em>,
+<em>must not</em>, <em>should</em>, <em>should not</em>, and <em>may</em>.  The terms <em>prefer</em> and
+<em>avoid</em> correspond to <em>should</em> and <em>should not</em>, respectively.  Imperative
+and declarative statements are prescriptive and correspond to <em>must</em>.</p></li>
+</ol>
+
+<p>Other <q>terminology notes</q> will appear occasionally throughout the document.</p>
+
+<h3 id="guide-notes">1.2 Guide notes</h3>
+
+<p>Example code in this document is <strong>non-normative</strong>. That is, while the examples
+are in Google Style, they may not illustrate the <em>only</em> stylish way to represent
+the code. Optional formatting choices made in examples must not be enforced as
+rules.</p>
+
+<h2 id="source-file-basics">2. Source file basics</h2>
+
+<h3 id="file-name">2.1 File name</h3>
+
+<p>File names must be all lowercase and may include underscores (<code>_</code>) or dashes
+(<code>-</code>), but no additional punctuation. Follow the convention that your project
+uses. Filenames&#8217; extension must be <code>.js</code>.</p>
+
+<h3 id="file-encoding">2.2 File encoding: UTF-8</h3>
+
+<p>Source files are encoded in <strong>UTF-8</strong>.</p>
+
+<h3 id="special-characters">2.3 Special characters</h3>
+
+<h4 id="whitespace-characters">2.3.1 Whitespace characters</h4>
+
+<p>Aside from the line terminator sequence, the ASCII horizontal space character
+(0x20) is the only whitespace character that appears anywhere in a source
+file. This implies that</p>
+
+<ol>
+<li><p>All other whitespace characters in string literals are escaped, and</p></li>
+<li><p>Tab characters are <strong>not</strong> used for indentation.</p></li>
+</ol>
+
+<h4 id="special-escape-sequences">2.3.2 Special escape sequences</h4>
+
+<p>For any character that has a special escape sequence (<code>\'</code>, <code>\"</code>, <code>\\</code>, <code>\b</code>,
+<code>\f</code>, <code>\n</code>, <code>\r</code>, <code>\t</code>, <code>\v</code>), that sequence is used rather than the
+corresponding numeric escape (e.g <code>\x0a</code>, <code>\u000a</code>, or <code>\u{a}</code>). Legacy octal
+escapes are never used.</p>
+
+<h4 id="non-ascii-characters">2.3.3 Non-ASCII characters</h4>
+
+<p>For the remaining non-ASCII characters, either the actual Unicode character
+(e.g. <code>&#8734;</code>) or the equivalent hex or Unicode escape (e.g. <code>\u221e</code>) is used,
+depending only on which makes the code <strong>easier to read and understand</strong>.</p>
+
+<p>Tip: In the Unicode escape case, and occasionally even when actual Unicode
+characters are used, an explanatory comment can be very helpful.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Example
+      </th><th>Discussion
+  </th></tr></thead><tbody>
+    <tr>
+      <td><code class="prettyprint lang-js">const units = '&#956;s';</code>
+      </td><td>Best: perfectly clear even without a comment.
+    </td></tr><tr>
+      <td>
+        <code class="prettyprint lang-js">const units = '\u03bcs'; // '&#956;s'
+        </code>
+      </td><td>Allowed, but there&#8217;s no reason to do this.
+    </td></tr><tr>
+      <td>
+        <code class="prettyprint lang-js">const units = '\u03bcs'; // Greek letter mu, 's'
+        </code>
+      </td><td>Allowed, but awkward and prone to mistakes.
+    </td></tr><tr>
+      <td><code class="badcode">const units = '\u03bcs';</code>
+      </td><td>Poor: the reader has no idea what this is.
+    </td></tr><tr>
+      <td>
+        <code class="prettyprint lang-js">return '\ufeff' + content;  // byte order mark
+        </code>
+      </td><td>
+        Good: use escapes for non-printable characters, and comment if
+        necessary.
+</td></tr></tbody></table>
+
+<p>Tip: Never make your code less readable simply out of fear that some programs
+might not handle non-ASCII characters properly. If that happens, those programs
+are <strong>broken</strong> and they must be <strong>fixed</strong>.</p>
+
+<h2 id="source-file-structure">3 Source file structure</h2>
+
+<p>A source file consists of, <strong>in order</strong>:</p>
+
+<ol>
+<li>License or copyright information, if present</li>
+<li><code>@fileoverview</code> JSDoc, if present</li>
+<li><code>goog.module</code> statement</li>
+<li><code>goog.require</code> statements</li>
+<li>The file&#8217;s implementation</li>
+</ol>
+
+<p><strong>Exactly one blank line</strong> separates each section that is present, except the
+file's implementation, which may be preceded by 1 or 2 blank lines.</p>
+
+<h3 id="file-copyright">3.1 License or copyright information, if present</h3>
+
+<p>If license or copyright information belongs in a file, it belongs here.</p>
+
+<p></p>
+
+<p></p>
+
+<h3 id="file-fileoverview">3.2 <code>@fileoverview</code> JSDoc, if present</h3>
+
+<p>See <a href="#jsdoc-top-file-level-comments">??</a> for formatting rules.</p>
+
+<h3 id="file-goog-module">3.3 <code>goog.module</code> statement</h3>
+
+<p>All files must declare exactly one <code>goog.module</code> name on a single line: lines
+containing a <code>goog.module</code> declaration must not be wrapped, and are therefore an
+exception to the 80-column limit.</p>
+
+<p>The single <code>goog.module</code> statement may optionally be followed by calls to
+<code>goog.module.declareLegacyNamespace();</code> and/or <code>goog.setTestOnly();</code> Avoid
+<code>goog.module.declareLegacyNamespace()</code> when possible.</p>
+
+<p>Example:</p>
+
+<pre><code class="language-js prettyprint">goog.module('my.test.helpers');
+goog.module.declareLegacyNamespace();
+goog.setTestOnly();
+</code></pre>
+
+<h4 id="file-declare-legacy-namespace">3.3.1 <code>goog.module.declareLegacyNamespace</code></h4>
+
+<p><code>goog.module.declareLegacyNamespace</code> exists to ease the transition from
+traditional namespaces but comes with some naming restrictions. As the child
+module name must be created after the parent namespace, this name <strong>must not</strong>
+be a child or parent of any other <code>goog.module</code> (for example,
+<code>goog.module('parent');</code> and <code>goog.module('parent.child');</code> cannot both exist,
+nor can <code>goog.module('parent');</code> and <code>goog.module('parent.child.grandchild');</code>).</p>
+
+<h4 id="file-es6-modules">3.3.2 ES6 Modules</h4>
+
+<p>Do not use ES6 modules yet (i.e. the <code>export</code> and <code>import</code> keywords), as their
+semantics are not yet finalized. Note that this policy will be revisited once
+the semantics are fully-standard.</p>
+
+</div>
+<div id="End_of_page"></div>
+<a href="#content" class="button" style="position:relative; float:right;"><img src="up-arrow.png" style="width:20; height:20; margin-top:6px;"></a>
+</body>
+</html>

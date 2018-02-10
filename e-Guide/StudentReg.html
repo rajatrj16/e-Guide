@@ -1,0 +1,186 @@
+<html>
+    <head>
+        <title>Student's Registration</title>
+		<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <style>
+  .jumbotron {
+    background-color: #f4511e; /* Orange */
+    color: #ffffff;
+}
+</STYLE>
+       
+		<script type="text/javascript">
+		function validate()//validate cust_id
+		{
+		r=document.getElementById("C_id").value;
+		i=0,flag=0;
+		if(r.length<1)
+		{
+		alert("Please enter your Student ID");
+		document.getElementsByid("C_id").innerHTML = "Please enter value!";
+		}
+		else
+		{
+		for(i=0;i<r.length;i++)
+		{
+			if(r.charAt(i)>='0' && r.charAt(i)<='9');
+			else
+			flag=1;
+		}
+		if(flag)
+			alert("Student ID should contain only numbers");
+		}
+		}
+		
+		function pass()//validate password
+		{
+			ps=document.getElementById("pswd").value;
+			if(ps.length<=6)
+			alert("Password should be minimum 6 characters long");
+		}
+		function namecheck()//validate name
+		{
+			n=document.getElementById("name").value;
+			if(n.length<1)
+			alert("Please enter your name");
+			else{
+			i=0,flag=0;
+			for(i=0;i<n.length;i++)
+			{
+				if((n.charAt(i)>='A' && n.charAt(i)<='Z')||(n.charAt(i)>='a' && n.charAt(i)<='z') || n.charAt==' ');
+				else
+				flag=1;
+			}
+			if(flag)
+			alert("Name should have only alphabets");
+			}
+		}
+		function numcheck()//validate contact number
+		{
+			num=document.getElementById("phone").value;
+			if(num.length<10)
+			alert("Phone no. should be of 10 digits");
+		}
+		function check_email() 
+		{
+		var valemail = document.getElementById('email');
+		var filter = /^[a-zA-Z0-9._]*\@[a-zA-Z]*\.[a-zA-Z]{2,5}$/;
+		if (!filter.test(valemail.value)) {
+		alert('Please provide a valid email');
+		document.getElementsByid("email").innerHTML = "Please enter Email!";
+		return false;
+		}
+		return true;
+		}
+		/*function fempty()//check for empty fields
+		{
+			r=document.getElementById("c_id").value;
+			n=document.getElementById("name").value;
+			em=document.getElementById("email").value;
+			dob=document.getElementById("dob").value;
+			g=document.getElementById("gender").value;
+			ad=document.getElementById("address").value;
+			ps=document.getElementById("pswd").value;
+			num=document.getElementById("phone").value;
+			if(r.length<1 || n.length<1 || str.length<1 || unv.length<1 || clg.length<1 || em.length<1 || dob.length<1 || g.length<1 || ad.length<1 ||ps.length<1 || num.length<1){
+			alert("Please fill all the fields");
+			return false;
+			}
+			else
+			return true;
+			//alert("Registration successful!");
+		} */
+		
+		</script>
+    </head>
+    <body>
+	
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">e-Guide</a>
+    </div>
+	
+<ul class="nav navbar-nav">
+      <li class="active"><a href="mainpage.html">Home</a></li>
+      <li><a href="aboutus.html">About us</a></li>
+      <li><a href="feed.html">Feedback</a></li>
+	  <li><a href="suggestions.html">Content Suggestions</a></li>
+	  <li><a href="Admin.html">Admin Login</a></li>
+	  
+	 <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <p class="navbar-text">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </p>
+ <a href="Student.html"><button class="btn btn-danger navbar-btn">Student Login</button></a>
+    </ul>
+  </div>
+</nav>
+<div class="jumbotron text-center">
+  <h1>Student Registration Form</h1>
+
+  <p><p>Please fill the following details to proceed!</p></p>
+</div>
+
+<center>
+        <div class="logincontainer" style="width:80%">
+            <form name="stud_reg" action="StudentReg_php.php" method="post">
+                <table width="40%" class="table table-hover">
+                    <tr>
+                        <td>Student ID*</td>
+                        <td><input type="text"  name="cidT" class="logintext"  onblur="validate();" placeholder="Enter your Student ID." id="C_id"/></td>
+						
+                    </tr>
+                    <tr>
+                        <td>Name*</td>
+                        <td><input type="text"  name="cnameT" class="logintext"  onblur="namecheck();" placeholder="Enter Your Name" id="name"/></td>
+						
+                    </tr>
+                     
+                    <tr>
+                        <td>Email id*</td>
+                        <td><input type="text" name="cemailT" class="logintext" placeholder="Enter Email" onblur="check_email();" id="email"/></td>
+                    </tr>
+                    <tr>
+                        <td>DOB</td>
+                        <td><input type="date" name="cdobT" class="logintext" id="dob" placeholder="Enter date of birth"></td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td><input type="radio" name="cgnT" value="M" checked="checked"/> M &nbsp; <input type="radio" id="gender" name = "cgnT"value="F"/> F</td>
+                    </tr>
+                    <tr>
+                        <td>Address</td>
+                        <td><textarea id="address" name="caddrT" class="logintext"></textarea> </td>
+                    </tr>
+                    <tr>
+                        <td>Phone*</td>
+                        <td><input type="text" name="cnoT" class="logintext" onblur="numcheck();" maxlength="10" placeholder="Enter Your Contact No." id="phone"/></td>
+						
+					</tr>
+                    <tr>
+                        <td>Password*</span></td>
+                        <td><input type="password" class="logintext" onblur="pass();" placeholder="Enter Your Password" id="pswd" name="pswdT"/></td>
+						
+                    </tr>
+                    
+                    <tr>
+                        <td align="right"><input type="submit" onsubmit="return fempty();" class="loginbtn"></td>
+						<td align="left"><input type="reset" class="loginbtn"></td>
+                    </tr>
+
+                </table>
+            </form>
+			
+        </div>
+</center>
+</form>
+</body>
+</html>

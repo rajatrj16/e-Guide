@@ -1,0 +1,281 @@
+<html>
+<head>
+<title>Java Guide | e-Guide</title>
+<style>
+h1{color:red;
+text-shadow:2px 2px blue;
+font-family:Algerian;
+}
+hr {
+  margin-top: 3.5em;
+  border-width: 1px;
+  color: #fff;
+}
+html {
+  margin-top:2em;
+  margin-left:10%;
+  margin-right:10%;
+  padding:0;
+}
+body {
+  font-family:'Arial', sans-serif;
+  font-size:81.25%;
+  color:#222;
+  background-image:url(form.jpg);
+  line-height:1.67;
+  overflow: auto;
+}
+em {
+  font-style: italic
+}
+h1 {
+  margin-bottom:.50em;
+  text-align: center
+}
+td {
+  border:1px solid #bbb;
+}
+th {
+  border:0;
+  border-bottom:1px solid black;
+  font-weight:bold;
+  background:rgb(229, 236, 249);
+}
+code{
+  color:#009900;
+}
+.tip {
+  background-color:#fffbd9;
+  padding:6px 8px 6px 10px;
+  border-left:5px solid #ffef70;
+}
+code {
+  background-color:#FAFAFA;
+}
+
+</style>
+</head>
+<body>
+<a href="AfterStuLogin.html" class="button"><img src="home-512.png" style="width:20; height:20; margin-top:6px;"></a>
+<div>
+<h1><big><big>Java Style Guide</big></big></h1>
+
+<div>
+<h2 id="s1-introduction">1 Introduction</h2>
+
+<p>This document serves as the complete definition of Google's coding standards for
+source code in the <strong>Java</strong> Programming Language. A Java source file is described as being in
+Google Style if and only if it adheres to the rules herein.</p>
+
+<p>Like other programming style guides, the issues covered span not only aesthetic issues of
+formatting, but other types of conventions or coding standards as well.
+</p>
+
+
+
+<h3 id="s1.1-terminology">1.1 Terminology notes</h3>
+
+<p>In this document, unless otherwise clarified:</p>
+
+<ol>
+  <li>The term <em><b>class<b></em> is used inclusively to mean an "ordinary" class,
+  interface or annotation type @interface.</li>
+
+  <li>The term <em>member</em> (of a class) is used inclusively to mean a nested class, field,
+  method, <em>or constructor</em>; that is, all top-level contents of a class except initializers
+  and comments.
+
+  </li><li>The term <em>comment</em> always refers to <em>implementation</em> comments. We do not
+  use the phrase "documentation comments", instead using the common term "Javadoc."</li>
+</ol>
+
+<p>Other "terminology notes" will appear occasionally throughout the document.</p>
+<h3 id="s1.2-guide-notes">1.2 Guide notes</h3>
+
+<p>Example code in this document is <strong>non-normative</strong>. That is, while the examples
+are in Google Style, they may not illustrate the <em>only</em> stylish way to represent the
+code. Optional formatting choices made in examples should not be enforced as rules.</p>
+
+
+<h2 id="s2-source-file-basics">2 Source file basics</h2>
+
+<h3 id="s2.1-file-name">2.1 File name</h3>
+
+<p>The source file name consists of the case-sensitive name of the top-level class it contains
+(of which there is <a href="#s3.4.1-one-top-level-class">exactly one</a>), plus the
+<code>.java</code> extension.</p>
+
+<h3 id="s2.2-file-encoding">2.2 File encoding: UTF-8</h3>
+
+<p>Source files are encoded in <strong>UTF-8</strong>.</p>
+
+<h3 id="s2.3-special-characters">2.3 Special characters</h3>
+
+<h4 id="s2.3.1-whitespace-characters">2.3.1 Whitespace characters</h4>
+
+<p>Aside from the line terminator sequence, the <strong>ASCII horizontal space
+character</strong> (<strong>0x20</strong>) is the only whitespace character that appears
+anywhere in a source file. This implies that:</p>
+
+<ol>
+  <li>All other whitespace characters in string and character literals are escaped.</li>
+
+  <li>Tab characters are <strong>not</strong> used for indentation.</li>
+</ol>
+
+<h4 id="s2.3.2-special-escape-sequences">2.3.2 Special escape sequences</h4>
+
+<p>For any character that has a (Tutorial Link)
+<a href="http://docs.oracle.com/javase/tutorial/java/data/characters.html">
+   special escape sequence</a>
+(<code>\b</code>,
+<code>\t</code>,
+<code>\n</code>,
+<code>\f</code>,
+<code>\r</code>,
+<code>\"</code>,
+<code>\'</code> and
+<code>\\</code>), that sequence
+is used rather than the corresponding octal or Unicode escape.</p>
+
+<h4 id="s2.3.3-non-ascii-characters">2.3.3 Non-ASCII characters</h4>
+
+<p>For the remaining non-ASCII characters, either the actual Unicode character or the equivalent Unicode escape is used. The choice depends only on
+which makes the code <strong>easier to read and understand</strong>, although Unicode escapes
+outside string literals and comments are strongly discouraged.</p>
+
+<p class="tip"><strong>Tip:</strong> In the Unicode escape case, and occasionally even when actual
+Unicode characters are used, an explanatory comment can be very helpful.</p>
+
+<p>Examples:</p>
+
+<table>
+  <tbody><tr>
+    <th>Example</th>
+    <th>Discussion</th>
+  </tr>
+
+  <tr>
+    <td><code >String unitAbbrev = "&#956;s";</code></td>
+    <td>Best: perfectly clear even without a comment.</td>
+  </tr>
+
+  <tr>
+    <td><code >String unitAbbrev = "\u03bcs"; // "&#956;s"</code></td>
+    <td>Allowed, but there's no reason to do this.</td>
+  </tr>
+
+  <tr>
+    <td><code >String unitAbbrev = "\u03bcs";
+      // Greek letter mu, "s"</code></td>
+    <td>Allowed, but awkward and prone to mistakes.</td>
+  </tr>
+
+  <tr>
+    <td><code class="badcode">String unitAbbrev = "\u03bcs";</code></td>
+    <td>Poor: the reader has no idea what this is.</td>
+  </tr>
+
+  <tr>
+     <td><code >return '\ufeff' + content;
+       // byte order mark</code></td>
+     <td>Good: use escapes for non-printable characters, and comment if necessary.</td>
+  </tr>
+</tbody></table>
+
+<p class="tip"><strong>Tip:</strong> Never make your code less readable simply out of fear that
+some programs might not handle non-ASCII characters properly. If that should happen, those
+programs are <strong>broken</strong> and they must be <strong>fixed</strong>.</p>
+
+
+<a name="filestructure"></a>
+<h2 id="s3-source-file-structure">3 Source file structure</h2>
+
+<div>
+<p>A source file consists of, <strong>in order</strong>:</p>
+
+<ol>
+  <li>License or copyright information, if present</li>
+  <li>Package statement</li>
+  <li>Import statements</li>
+  <li>Exactly one top-level class</li>
+</ol>
+</div>
+
+<p><strong>Exactly one blank line</strong> separates each section that is present.</p>
+
+<h3 id="s3.1-copyright-statement">3.1 License or copyright information, if present</h3>
+
+<p>If license or copyright information belongs in a file, it belongs here.</p>
+
+
+
+<h3 id="s3.2-package-statement">3.2 Package statement</h3>
+
+<p>The package statement is <strong>not line-wrapped</strong>. The column limit  does not apply to package statements.</p>
+
+<a name="imports"></a>
+<h3 id="s3.3-import-statements">3.3 Import statements</h3>
+
+<h4 id="s3.3.1-wildcard-imports">3.3.1 No wildcard imports</h4>
+
+<p><strong>Wildcard imports</strong>, static or otherwise, <strong>are not used</strong>.</p>
+
+<h4 id="s3.3.2-import-line-wrapping">3.3.2 No line-wrapping</h4>
+
+<p>Import statements are <strong>not line-wrapped</strong>. The column limit does not apply to import
+statements.</p>
+
+<h4 id="s3.3.3-import-ordering-and-spacing">3.3.3 Ordering and spacing</h4>
+
+<p>Imports are ordered as follows:</p>
+
+<ol>
+  <li>All static imports in a single block.</li>
+  <li>All non-static imports in a single block.</li>
+</ol>
+
+<p>If there are both static and non-static imports, a single blank line separates the two
+blocks. There are no other blank lines between import statements.</p>
+
+<p>Within each block the imported names appear in ASCII sort order. (<strong>Note:</strong>
+this is not the same as the import <em>statements</em> being in ASCII sort order, since '.'
+sorts before ';'.)</p>
+
+
+
+<h4 id="s3.3.4-import-class-not-static">3.3.4 No static import for classes</h4>
+
+<p>Static import is not used for static nested classes. They are imported with
+normal imports.</p>
+
+<h3 id="s3.4-class-declaration">3.4 Class declaration</h3>
+
+<h4 id="s3.4.1-one-top-level-class">3.4.1 Exactly one top-level class declaration</h4>
+
+<p>Each top-level class resides in a source file of its own.</p>
+
+<a name="s3.4.2-class-member-ordering"></a>
+<h4 id="s3.4.2-ordering-class-contents">3.4.2 Ordering of class contents</h4>
+
+<p>The order you choose for the members and initializers of your class can have a great effect on
+learnability. However, there's no single correct recipe for how to do it; different classes may
+order their contents in different ways.</p>
+
+<p>What is important is that each class uses <strong>some logical order</strong>, which its
+maintainer could explain if asked. For example, new methods are not just habitually added to the end
+of the class, as that would yield "chronological by date added" ordering, which is not a logical
+ordering.</p>
+
+
+
+<a name="overloads"></a>
+<h5 id="s3.4.2.1-overloads-never-split">3.4.2.1 Overloads: never split</h5>
+
+<p>When a class has multiple constructors, or multiple methods with the same name, these appear
+sequentially, with no other code in between (not even private members).</p>
+
+</div>
+</div>
+</body>
+</html>
